@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem Interativa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+        .image {
+            width: 80%;
+            max-width: 800px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .image:hover {
+            transform: scale(1.1);
+        }
+
+        /* Estilo do único botão para abrir a imagem em tela cheia */
+        .button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 24px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            margin-top: 20px; /* Deixando o botão abaixo da imagem */
+        }
+
+        .button:hover {
+            background-color: #28a745;
+        }
+
+        /* Estilo para a tela cheia */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .fullscreen img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Estilo para o botão de fechar */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        /* Estilo dos botões para exibir texto ao passar o mouse */
+        .text-button {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 1px solid #ccc;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .text-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .text-button-description {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 12px;
+            width: 200px;
+        }
+
+        .text-button:hover .text-button-description {
+            display: block;
+        }
+
+        /* Posicionamento e estilos específicos para cada botão de texto */
+        .button2 {
+            top: 5%;
+            left: 14%;
+            background-color: rgba(255, 0, 0, 0);
+            padding: 70px 70px;
+        }
+
+        .button3 {
+            top: 52%;
+            left: 14%;
+            background-color: rgba(0, 0, 255, 0);
+            padding: 40px 75px;
+        }
+
+        .button4 {
+            top: 3%;
+            left: 43%;
+            background-color: rgba(255, 166, 0, 0);
+            padding: 50px 80px;
+        }
+
+        .button5 {
+            top: 3%;
+            left: 72%;
+            background-color: rgba(128, 0, 128, 0);
+            padding: 50px 64px;
+        }
+
+        .button6 {
+            top: 40%;
+            left: 43%;
+            background-color: rgba(255, 255, 0, 0);
+            padding: 32px 29px;
+        }
+
+        .button7 {
+            top: 67%;
+            left: 85%;
+            background-color: rgba(255, 192, 203, 0);
+            padding: 24px 14px;
+        }
+
+        .button8 {
+            top: 67%;
+            left: 60%;
+            background-color: rgba(165, 42, 42, 0);
+            padding: 25px 58px;
+        }
+
+        .button9 {
+            top: 40%;
+            left: 61%;
+            background-color: rgba(0, 128, 128, 0);
+            padding: 34px 60px;
+        }
+
+        .button11 {
+    top: 43%;
+    left: 71%;
+    background-color: rgba(255, 0, 0, 0);
+    padding: 36px 14px;
+}
+        .button10 {
+            top: 69%;
+            left: 43%;
+            background-color: rgba(0, 255, 0, 0);
+            padding: 25px 30px;
+        }
+
+
+/* Novo botão rosa adicional */
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- A imagem inicial -->
+    <img src="1.png" alt="Imagem" class="image" id="mainImage">
+
+    <!-- O único botão para abrir a imagem em tela cheia -->
+    <div class="button" onclick="openFullscreen()">
+        <span>TELA CHEIA</span> <!-- Emoji de imagem -->
+    </div>
+    
+    <!-- Botões para exibir a caixa de texto -->
+    <div class="text-button button2">
+        <span class="text-button-description">HOSPITAL<br>Serviço-Publico</br><br>El hospital es un servicio público porque garantiza el acceso a la salud para toda la población, siendo financiado con recursos públicos.</br></span>
+    </div>
+    <div class="text-button button3">
+        <span class="text-button-description">ESTACIÓN DE BOMBEIROS<br>Serviço-Publico</br><br>La estación de bomberos es un servicio público porque protege a la población en emergencias, siendo financiada por el Estado y accesible para todos.</br></span>
+    </div>
+    <div class="text-button button4">
+        <span class="text-button-description">ESCUELA<br>Serviço-Publico</br><br>La escuela es un servicio público porque garantiza el derecho a la educación para toda la población, siendo financiada por el Estado y accesible para todos.</br></span>
+    </div>
+    <div class="text-button button5">
+        <span class="text-button-description">JOYERÍA<br>Serviço-Privado</br><br>Un establecimiento privado que vende productos de lujo es una tienda que comercializa artículos exclusivos y caros, como joyas, ropa de marca, coches de lujo, entre otros.</br></span>
+    </div>
+    <div class="text-button button6">
+        <span class="text-button-description">PARQUE<br>Serviço-Publico</br><br>El parque es un servicio público porque es un área de recreo y convivencia disponible para toda la población, mantenida y financiada por el Estado.</br></span>
+    </div>
+    <div class="text-button button7">
+        <span class="text-button-description">FRUTERÍA<br>Serviço-Privado</br><br>La frutería es un servicio privado, que vende frutas y productos alimenticios.</br></span>
+    </div>
+    <div class="text-button button8">
+        <span class="text-button-description">SUPERMERCADO<br>Serviço-Privado</br><br>El supermercado no es un servicio público, ya que es un establecimiento privado que vende productos alimenticios y de consumo.</br></span>
+    </div>
+    <div class="text-button button9">
+        <span class="text-button-description">POLICÍA<br>Serviço-Publico</br><br>El centro de policía es un servicio público porque garantiza la seguridad y el orden, siendo mantenido por el Estado.</br></span>
+    </div>
+    <div class="text-button button10">
+        <span class="text-button-description">GIMNASIO<br>Serviço-Privado</br><br>El gimnasio es un servicio privado, que ofrece servicios de ejercicio físico y bienestar.</br></span>
+    </div>
+</div>
+
+    <div class="text-button button11">
+        <span class="text-button-description">RESTAURANTE<br>Serviço-Privado</br><br>El restaurante es un servicio privado, que ofrece servicios de alimentación a cambio de pago.</br></span>
+    </div>
+</div>
+
+<!-- Tela cheia -->
+<div id="fullscreenContainer" class="fullscreen" style="display: none;" onclick="closeFullscreen()">
+    <button class="close-btn">X</button>
+    <img id="fullscreenImage" src="" alt="Imagem em tela cheia">
+</div>
+
+<script>
+    // Função para abrir a imagem em tela cheia
+    function openFullscreen() {
+        const image = document.getElementById("mainImage");
+        const fullscreenContainer = document.getElementById("fullscreenContainer");
+        const fullscreenImage = document.getElementById("fullscreenImage");
+
+        fullscreenImage.src = image.src;
+        fullscreenContainer.style.display = 'flex';
+    }
+
+    // Função para fechar a tela cheia
+    function closeFullscreen() {
+        const fullscreenContainer = document.getElementById("fullscreenContainer");
+        fullscreenContainer.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
